@@ -16,6 +16,7 @@ import subprocess
 import argparse
 import time
 import sys
+import json
 
 
 def comment_line(line):
@@ -24,6 +25,12 @@ def comment_line(line):
         return "# " + line
     else:
         return "#"
+
+
+def get_markdown_json(fpath):
+    """Load page JSON as dictionary."""
+    cmd = "./bin/markdown_ast.rb < " + fpath
+    return json.loads(subprocess.check_output(cmd, shell=True).decode())
 
 
 def md2py(fpath_md):
